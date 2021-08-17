@@ -1,0 +1,2 @@
+Bid/Model/Comment.java
+ Bid.Model.Comment
