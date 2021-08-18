@@ -1,12 +1,16 @@
-Bid/Config/AppInit.java
- Bid.Config.AppInit
-Bid/Config/AppConfig.java
- Bid.Config.AppConfig
-Bid/Controller/mainController.java
- Bid.Controller.mainController
-Bid/Model/Comment.java
- Bid.Model.Comment
-Bid/Service/CommentIService.java
- Bid.Service.CommentIService
-Bid/Service/CommentI.java
- Bid.Service.CommentI
+config/AppInit.java
+ config.AppInit
+service/ICommentService.java
+ service.ICommentService
+repository/CommentRepo.java
+ repository.CommentRepo
+service/CommentService.java
+ service.CommentService
+model/comments.java
+ model.comments
+repository/ICommentRepository.java
+ repository.ICommentRepository
+config/AppConfig.java
+ config.AppConfig
+controller/mainController.java
+ controller.mainController
