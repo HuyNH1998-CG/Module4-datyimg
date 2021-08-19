@@ -1,16 +1,14 @@
-config/AppInit.java
- config.AppInit
-service/ICommentService.java
- service.ICommentService
-repository/CommentRepo.java
- repository.CommentRepo
-service/CommentService.java
- service.CommentService
-model/comments.java
- model.comments
-repository/ICommentRepository.java
- repository.ICommentRepository
-config/AppConfig.java
- config.AppConfig
-controller/mainController.java
- controller.mainController
+Big/service/ICommentService.java
+ Big.service.ICommentService
+Big/repository/ICommentRepository.java
+ Big.repository.ICommentRepository
+Big/model/comments.java
+ Big.model.comments
+Big/config/AppConfig.java
+ Big.config.AppConfig
+Big/config/AppInit.java
+ Big.config.AppInit
+Big/service/CommentService.java
+ Big.service.CommentService
+Big/controller/mainController.java
+ Big.controller.mainController

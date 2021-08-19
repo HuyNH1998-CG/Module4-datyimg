@@ -3,46 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-<img id="img-of-the-day">
-<form action="/comment" method="post" th:object="${comment}">
-    <input type="hidden" th:field="*{id}">
-    <input type="date" th:field="${comment.date}" id="toDay" hidden>
-    <input type="hidden" th:field="*{likes}" value="0">
-    <table>
+<div class="row">
+    <div class="col-sm-4">
+        <form action="/comment" method="post" th:object="${comment}">
+            <input type="hidden" th:field="*{id}">
+            <input type="date" th:field="${comment.date}" id="toDay" hidden>
+            <input type="hidden" th:field="*{likes}" value="0">
+            <table>
+                <tr>
+                    <th>Rate:</th>
+                    <td><input type="number" min="1" max="5" th:field="*{rate}" value="1"></td>
+                </tr>
+                <tr>
+                    <th>Author:</th>
+                    <td><input type="text" th:field="*{name}"></td>
+                </tr>
+                <tr>
+                    <th>Comment:</th>
+                    <td><textarea th:field="*{content}" cols="50" rows="10"></textarea><br></td>
+                </tr>
+            </table>
+            <button type="submit"> Comment</button>
+        </form>
+    </div>
+    <div class="col-sm-8">
+        <img id="img-of-the-day" width="100%">
+    </div>
+</div>
+<div class="container">
+    <table cellpadding="25 px" border="1">
         <tr>
-            <th>Rate:</th>
-            <td><input type="number" min="1" max="5" th:field="*{rate}"></td>
+            <th>Rating</th>
+            <th>Comment</th>
+            <th>By</th>
+            <th>Date</th>
+            <th>Likes</th>
         </tr>
-        <tr>
-            <th>Author:</th>
-            <td><input type="text" th:field="*{name}"></td>
-        </tr>
-        <tr>
-            <th>Comment:</th>
-            <td><textarea th:field="*{content}" cols="30" rows="10"></textarea><br></td>
-        </tr>
-    </table>
-    <button type="submit"> Comment</button>
-</form>
-<table cellpadding="25 px">
-    <tr>
-        <th>Rating</th>
-        <th>Comment</th>
-        <th>By</th>
-        <th>Date</th>
-        <th>Likes</th>
-    </tr>
-    <tr th:each="com : ${comments}">
+        <tr th:each="com : ${comments}" th:unless="${com.date.before(#dates.createToday())}">
             <th th:text="${com.rate}"></th>
             <th th:text="${com.content}"></th>
             <td th:text="${com.name}"></td>
             <td th:text="${com.date}"></td>
             <td th:text="${com.likes}"></td>
-            <td><a th:href="@{/like/{id}(id=${com.id})}"> Like</a></td>
-    </tr>
-</table>
+            <td><a th:href="@{/like/{id}(id=${com.id})}" class="btn btn-primary"> Like</a></td>
+        </tr>
+    </table>
+    <div>
+        <a th:href="@{/home(page=${comments.number - 1})}" th:if="${comments.hasPrevious()}">Previous</a>
+        <span th:text="${comments.number + 1}"></span>/<span th:text="${comments.totalPages}"></span>
+        <a th:href="@{/home(page=${comments.number + 1})}" th:if="${comments.hasNext()}">Next</a>
+    </div>
+</div>
 </body>
 <script>
     let query = 'https://api.nasa.gov/planetary/apod?api_key=4K0afVpJKcDnZmyStNDETwg09n1XWvtDUiINYSXU';
